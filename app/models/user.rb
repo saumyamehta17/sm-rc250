@@ -44,4 +44,15 @@ class User < ActiveRecord::Base
       nil
     end
   end
+
+  def self.new_guest
+    new(guest: true)
+  end
+
+  def name
+    guest? ? 'Guest' : email
+  end
+
+  def move_to(user)
+  end
 end

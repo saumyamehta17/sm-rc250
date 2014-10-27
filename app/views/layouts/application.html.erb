@@ -12,14 +12,20 @@
 <% end %>
 <div class='pull-right'>
   <% if current_user %>
-      Logged in as <%= current_user.email  %>
-      <%= link_to 'LogOut', session_path(current_user), method: :delete %>
+      Logged in as <strong><%= current_user.name  %></strong>
+      <% if current_user.guest? %>
+         <%= link_to 'Become a member',new_user_path %>
+      <% else %>
+          <%= link_to 'LogOut', session_path(current_user), method: :delete %>
+      <% end %>
+
   <% else %>
       <%= link_to 'Sign Up', new_user_path %> or
       <%= link_to 'login', new_session_path %>
   <% end %>
 </div>
 <%= yield %>
+<p><%= link_to 'Try it for free', users_path, method: :post %></p>
 
 </body>
 </html>
